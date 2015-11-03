@@ -23,7 +23,7 @@ gulp.task('lint', function() {
 gulp.task('templates', function() {
   return gulp.src('src/templates/*.html')
       .pipe(templateCache({
-        root: 'cn-forms',
+        root: 'cn-forms/templates',
         module: 'cn.forms'
       }))
       .pipe(gulp.dest('src'));
