@@ -4,16 +4,21 @@ CitizenNet Forms library
 # Installation
 
 ## 1. bower
-To get started, install CitizenNet's `angular-schema-form` fork, `cn-flex-form` and
+To get started, install CitizenNet's `cn-tags-input`, `angular-schema-form` fork, `cn-flex-form` and
 `cn-forms`:
 
+    bower install https://github.com/citizennet/cn-tags-input.git\#master --save-dev
     bower install https://github.com/citizennet/angular-schema-form.git\#master --save-dev
     bower install https://github.com/citizennet/cn-flex-form.git\#master --save-dev
     bower install https://github.com/citizennet/cn-forms.git\#master --save-dev
 
 ## 2. grunt/gulp
-Make sure to add the necessary files to your `grunt` or `gulp` build. For
-`angular-schema-form` you'll want:
+Make sure to add the necessary files to your `grunt` or `gulp` build.
+For `cn-tags-input` you'll want:
+
+    "dist/all.min.js"
+
+For `angular-schema-form`:
 
     "dist/schema-form.min.js",
     "dist/bootstrap-decorator.min.js"
@@ -29,11 +34,7 @@ And for `cn-forms`:
 ## 3. angular
 And last be sure to add it as a dependency for your angular app:
 
-    angular.module("yourapp", [
-        "schemaForm",
-        "cn.flex-form",
-        "cn.forms"
-    ]);
+    angular.module("yourapp", ["cn.forms"]);
 
 # Usage
 Controller:
