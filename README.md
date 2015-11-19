@@ -14,8 +14,7 @@ To get started, install CitizenNet's `cn-forms`:
     bower install https://github.com/citizennet/cn-forms.git#master --save-dev
 
 ## 3. grunt/gulp
-Make sure to add the necessary files to your `grunt` or `gulp` build.
-For `cn-forms`:
+Add the following file to your `grunt` or `gulp` build:
 
     "dist/all.min.js"
 
