@@ -3,40 +3,23 @@ CitizenNet Forms library
 
 # Installation
 
-## 1. bower
-To get started, install CitizenNet's `cn-util`, `cn-tags-input`, `angular-schema-form` fork, `cn-flex-form` and
-`cn-forms`:
+## 1. dependencies
+*cn-form* is built as an additional layer on top of
+*[cn-flex-form](https://github.com/citizennet/cn-flex-form)*, follow the installation
+instructions there and then continue with the steps below.
 
-    bower install https://github.com/citizennet/cn-util.git\#master --save-dev
-    bower install https://github.com/citizennet/cn-tags-input.git\#master --save-dev
-    bower install https://github.com/citizennet/angular-schema-form.git\#master --save-dev
-    bower install https://github.com/citizennet/cn-flex-form.git\#master --save-dev
-    bower install https://github.com/citizennet/cn-forms.git\#master --save-dev
+## 2. bower
+To get started, install CitizenNet's `cn-forms`:
 
-## 2. grunt/gulp
+    bower install https://github.com/citizennet/cn-forms.git#master --save-dev
+
+## 3. grunt/gulp
 Make sure to add the necessary files to your `grunt` or `gulp` build.
-For `cn-util` you'll want:
+For `cn-forms`:
 
     "dist/all.min.js"
 
-For `cn-tags-input` you'll want:
-
-    "dist/all.min.js"
-
-For `angular-schema-form`:
-
-    "dist/schema-form.min.js",
-    "dist/bootstrap-decorator.min.js"
-
-For `cn-flex-form`:
-
-    "dist/all.min.js"
-
-And for `cn-forms`:
-
-    "dist/all.min.js"
-
-## 3. angular
+## 4. angular
 And last be sure to add it as a dependency for your angular app:
 
     angular.module("yourapp", ["cn.forms"]);
