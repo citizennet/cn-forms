@@ -4,8 +4,8 @@ CitizenNet Forms library
 # Installation
 
 ## 1. dependencies
-*cn-form* is built as an additional layer on top of
-*[cn-flex-form](https://github.com/citizennet/cn-flex-form)*, follow the installation
+**cn-forms** is built as an additional layer on top of
+**[cn-flex-form](https://github.com/citizennet/cn-flex-form)**, follow the installation
 instructions there and then continue with the steps below.
 
 ## 2. bower
