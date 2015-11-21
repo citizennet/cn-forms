@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <div class="cn-form-body" ng-class="{'col-sm-6': vm.config.schema.forms, 'col-sm-8': !vm.config.schema.forms}">
+      <div class="cn-form-body" ng-class="{'col-sm-6': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
         <div class="{{$index !== vm.pageIndex ? 'offscreen' : ''}}"
              ng-if="vm.config.schema.forms"
              ng-repeat="form in vm.config.schema.forms">
@@ -106,7 +106,7 @@
       <!--{{vm.cnForm.$dirty | json}}-->
       <!--</pre>-->
       <!--</div>-->
-      <div class="cn-form-meta" ng-class="{'col-sm-3': vm.config.schema.forms, 'col-sm-4': !vm.config.schema.forms}">
+      <div class="cn-form-meta" ng-class="{'col-sm-3': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
         <div class="cn-form-meta-inner"
              cn-parent-width
              cn-responsive-height
