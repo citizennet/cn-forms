@@ -36,7 +36,7 @@
        cn-responsive-break="sm">
     <div class="cn-form-inner">
 
-      <div class="col-sm-3 cn-form-nav">
+      <div class="col-sm-3 cn-form-nav" ng-if="vm.config.schema.forms">
         <div class="cn-form-nav-inner"
              cn-parent-width
              cn-responsive-height
@@ -54,8 +54,9 @@
         </div>
       </div>
 
-      <div class="cn-form-body col-sm-6">
+      <div class="cn-form-body" ng-class="{'col-sm-6': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
         <div class="{{$index !== vm.pageIndex ? 'offscreen' : ''}}"
+             ng-if="vm.config.schema.forms"
              ng-repeat="form in vm.config.schema.forms">
           <cn-flex-form
             ff-form-index="$index"
@@ -65,6 +66,15 @@
             ff-delay-form="$index !== vm.pageIndex && !vm.activateOffscreen">
           </cn-flex-form>
         </div>
+
+        <cn-flex-form
+          ng-if="!vm.config.schema.forms"
+          ff-form-index="$index"
+          ff-form-name="vm.config.schema.form.key"
+          ff-config="vm.config"
+          ff-model="vm.model"
+          ff-delay-form="$index !== vm.pageIndex && !vm.activateOffscreen">
+        </cn-flex-form>
 
         <!-- debug panel to display model -->
         <pre ng-if="vm.debug">{{vm.model|json}}</pre>
@@ -96,7 +106,7 @@
       <!--{{vm.cnForm.$dirty | json}}-->
       <!--</pre>-->
       <!--</div>-->
-      <div class="col-sm-3 cn-form-meta">
+      <div class="cn-form-meta" ng-class="{'col-sm-3': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
         <div class="cn-form-meta-inner"
              cn-parent-width
              cn-responsive-height
