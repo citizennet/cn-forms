@@ -11,12 +11,14 @@ instructions there and then continue with the steps below.
 ## 2. bower
 To get started, install CitizenNet's `cn-forms`:
 
+    bower install https://github.com/citizennet/cn-ui.git#master --save-dev
     bower install https://github.com/citizennet/cn-forms.git#master --save-dev
 
 ## 3. grunt/gulp
-Add the following file to your `grunt` or `gulp` build:
+Add the following vendor files to your `grunt` or `gulp` build:
 
-    "dist/all.min.js"
+    "cn-ui/dist/all.min.js"
+    "cn-forms/dist/all.min.js"
 
 ## 4. angular
 And last be sure to add it as a dependency for your angular app:
