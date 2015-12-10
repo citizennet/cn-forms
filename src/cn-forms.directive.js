@@ -113,6 +113,8 @@
               console.log('submit:response:', response);
               vm.config.formCtrl.$setPristine();
               vm.saving = false;
+            }, function(rejection) {
+              vm.saving = false;
             });
       }
       else {
