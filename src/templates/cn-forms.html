@@ -76,9 +76,6 @@
           ff-delay-form="$index !== vm.pageIndex && !vm.activateOffscreen">
         </cn-flex-form>
 
-        <!-- debug panel to display model -->
-        <pre ng-if="vm.debug">{{vm.model|json}}</pre>
-
         <!-- sandbox for debug mode -->
         <fieldset ng-if="vm.sandbox">
           <legend>Sandbox</legend>

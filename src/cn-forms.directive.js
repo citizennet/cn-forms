@@ -4,8 +4,7 @@
       .module('cn.forms')
       .directive('cnForm', cnForm);
 
-  cnForm.$inject = ['$window'];
-  function cnForm($window) {
+  function cnForm() {
     return {
       restrict: 'E',
       templateUrl: 'cn-forms/templates/cn-forms.html',
@@ -83,10 +82,6 @@
       if($location.search().sandbox) {
         vm.schemaStr = angular.toJson(vm.config.schema);
         vm.sandbox = true;
-      }
-      // debug
-      if($location.search().debug) {
-        vm.debug = true;
       }
     }
 
