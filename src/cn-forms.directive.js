@@ -34,6 +34,7 @@
     vm.updateData = updateData;
     vm.updatePage = updatePage;
     vm.validatePage = validatePage;
+    vm.cleanupEvent = "cn.forms.cleanup";
 
     // debug
     vm.schemaStr = '';
@@ -42,6 +43,10 @@
     $scope.$watch(function() {
       return !!vm.config.schema;
     }, vm.activate);
+
+    $scope.$on('$destroy', function() {
+      $scope.$emit(vm.cleanupEvent);
+    });
 
     //////////
 
@@ -134,6 +139,7 @@
       $state.go($state.current.name, $stateParams);
 
       $scope.$emit('flexForm.updatePage', page);
+      $scope.$broadcast('flexForm.updatePage', page);
     }
 
     function validatePage(page, noBadge) {
