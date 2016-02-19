@@ -31,7 +31,6 @@
     vm.activate = activate;
     vm.loadOffscreen = loadOffscreen;
     vm.submit = submit;
-    vm.updateData = updateData;
     vm.updatePage = updatePage;
     vm.validatePage = validatePage;
     vm.cleanupEvent = "cn.forms.cleanup";
@@ -57,6 +56,8 @@
       vm.activateOffscreen = false;
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
+      vm.config.buttonContainerClass = "page-action-btns";
+      vm.config.isDisabled = isDisabled;
 
       if(vm.config.schema) {
         try {
@@ -88,6 +89,10 @@
         vm.schemaStr = angular.toJson(vm.config.schema);
         vm.sandbox = true;
       }
+    }
+
+    function isDisabled(btnConfig) {
+      return vm.saving || vm.cnForm.$invalid || ((!btnConfig.allowPristine || !vm.activateOffscreen) && vm.cnForm.$pristine)
     }
 
     function loadOffscreen() {
@@ -123,11 +128,6 @@
           vm.validatePage(page, page === vm.page);
         });
       }
-    }
-
-    function updateData() {
-      console.log('updateData:', updateData);
-      $scope.$emit('ffRefreshData');
     }
 
     function updatePage(page) {
