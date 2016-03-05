@@ -96,7 +96,7 @@
     }
 
     function isDisabled(btnConfig) {
-      return vm.saving || vm.cnForm.$invalid || ((!btnConfig.allowPristine || !vm.activateOffscreen) && vm.cnForm.$pristine)
+      return vm.saving || vm.cnForm.$invalid || ((!btnConfig.allowPristine || !vm.activateOffscreen) && vm.cnForm.$pristine);
     }
 
     function loadOffscreen() {

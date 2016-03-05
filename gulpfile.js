@@ -45,7 +45,7 @@ gulp.task('watch', function() {
   gulp.watch('src/*.js', ['lint', 'scripts']);
 });
 
-// Default Task
+// Build Task
 gulp.task('build', ['lint', 'templates', 'scripts']);
 
 // Default Task
