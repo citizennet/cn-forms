@@ -85,8 +85,10 @@
              cn-parent-width
              cn-responsive-height
              cn-responsive-break="sm"
-             cn-set-max-height="true"
-             ng-transclude></div>
+             cn-set-max-height="true">
+          <div ng-bind-html="vm.config.schema.meta"/>
+          <div ng-transclude/>
+        </div>
       </div>
     </div>
   </div>
