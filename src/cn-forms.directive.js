@@ -34,6 +34,7 @@
     vm.updatePage = updatePage;
     vm.validatePage = validatePage;
     vm.cleanupEvent = "cn.forms.cleanup";
+    vm.formKey = $stateParams.page;
 
     // debug
     vm.schemaStr = '';
