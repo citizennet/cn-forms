@@ -92,7 +92,11 @@
       }
     }
 
-    function isDisabled(btnConfig) {
+     function isDisabled(btnConfig) {
+      return btnConfig.isDisabled ? btnConfig.isDisabled(isFormInvalid) : isFormInvalid(btnConfig);
+    }
+
+    function isFormInvalid(btnConfig) {
       return vm.saving || vm.cnForm.$invalid || ((!btnConfig.allowPristine || !vm.activateOffscreen) && vm.cnForm.$pristine);
     }
 
