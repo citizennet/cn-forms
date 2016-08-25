@@ -116,7 +116,7 @@
       $scope.$broadcast('schemaFormValidate');
       $scope.$emit('schemaFormValidate');
 
-      if(form.$valid && !vm.saving) {
+      if((form.$valid || vm.config.allowInvalid) && !vm.saving) {
         vm.saving = true;
         handler(vm.model)
             .then(function(response) {
