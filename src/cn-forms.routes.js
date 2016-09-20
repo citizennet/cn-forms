@@ -20,10 +20,12 @@
     }
 
     function addStates(options) {
+      let pageParam = options.excludedPage ? `{page:(?!${options.excludedPage})[^/]*}` : ':page';
+      let queryParams = ['debug', 'sandbox'].concat(options.queryParams || []).join('&');
       $stateProvider
           .state(options.name, {
             abstract: true,
-            url: options.baseUrl,
+            url: `${options.baseUrl}?${queryParams}`,
             controller: options.controller,
             controllerAs: 'vm',
             template: '<ui-view></ui-view>',
@@ -32,7 +34,7 @@
             params: options.params
           })
           .state(options.name + '.page', {
-            url: (options.excludedPage ? '/{page:(?!' + options.excludedPage + ')[^/]*}' : '/:page') + '?debug&sandbox',
+            url: `/${pageParam}`,
             templateUrl: options.templateUrl,
             permissions: options.permissions
           });

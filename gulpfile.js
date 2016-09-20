@@ -6,7 +6,10 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var sourcemaps = require('gulp-sourcemaps');
+var babel = require('gulp-babel');
 var templateCache = require('gulp-angular-templatecache');
+var runSequence = require('run-sequence');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -31,11 +34,14 @@ gulp.task('templates', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts', ['lint', 'templates'], function() {
-  return gulp.src('src/*.js')
+  return gulp.src(['src/*.js', '!src/*.test.js'])
+      .pipe(sourcemaps.init())
+      .pipe(babel())
       .pipe(concat('all.js'))
       .pipe(gulp.dest('dist'))
       .pipe(rename('all.min.js'))
       .pipe(uglify())
+      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('dist'));
 });
 
@@ -46,7 +52,7 @@ gulp.task('watch', function() {
 });
 
 // Build Task
-gulp.task('build', ['lint', 'templates', 'scripts']);
+gulp.task('build', r => runSequence(['lint', 'templates'], 'scripts', r));
 
 // Default Task
 gulp.task('default', ['build', 'watch']);
