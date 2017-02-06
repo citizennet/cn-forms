@@ -12,7 +12,7 @@
        cn-responsive-break="sm">
     <div class="cn-form-inner">
 
-      <div class="col-sm-3 cn-form-nav" ng-if="vm.config.schema.forms">
+      <div class="col-sm-2 cn-form-nav" ng-if="vm.config.schema.forms">
         <div class="cn-form-nav-inner"
              cn-parent-width
              cn-responsive-height
@@ -21,7 +21,7 @@
             <li class="{{page.key === vm.page.key ? 'active' : ''}}"
                 ng-repeat="page in vm.config.schema.forms">
               <a ng-click="vm.updatePage(page.key)">
-                <i class="cni cni-{{page.key}}"></i>
+                <!-- i class="cni cni-{{page.key}}"></i -->
                 {{page.title || page.key | titleCase}}
                 <span class="badge has-error" ng-show="page.errors">{{page.errors}}</span>
               </a>
@@ -74,7 +74,7 @@
         <!-- end sandbox -->
       </div>
 
-      <div class="cn-form-meta" ng-class="{'col-sm-3': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
+      <div class="cn-form-meta" ng-class="{'col-sm-4': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
         <div class="cn-form-meta-inner"
              cn-parent-width
              cn-responsive-height
