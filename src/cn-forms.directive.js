@@ -45,6 +45,7 @@
     }, vm.activate);
 
     $scope.$on('$destroy', function() {
+      $scope.$broadcast(vm.cleanupEvent);
       $scope.$emit(vm.cleanupEvent);
     });
 
@@ -77,8 +78,11 @@
             });
           }
 
-          //if(vm.offscreenTimeout) $timeout.cancel(vm.offscreenTimeout);
-          //vm.offscreenTimeout = $timeout(loadOffscreen, 2000);
+          vm.renderedPages = _.reduce(
+            vm.config.schema.forms,
+            (acc, value, index) => _.set(acc, index, _.eq(vm.pageIndex, index)),
+            {}
+          );
         }
         catch(e) {
           $log.error('There was an error with your form data:', e.message);
@@ -128,23 +132,25 @@
             });
       }
       else {
-        //console.error('form invalid:', form);
         _.each(vm.config.schema.forms, function(page) {
           vm.validatePage(page, page === vm.page);
         });
       }
     }
 
-    function updatePage(page) {
+    function updatePage(page, pageIndex) {
       $scope.$broadcast('schemaFormValidate');
 
-      vm.validatePage(vm.page);
+      vm.validatePage(vm.page.key);
 
-      $stateParams.page = page;
+      $stateParams.page = page.key;
       $state.go($state.current.name, $stateParams);
+      vm.page = page;
+      vm.pageIndex = pageIndex;
+      vm.renderedPages[pageIndex] = true;
 
-      $scope.$emit('flexForm.updatePage', page);
-      $scope.$broadcast('flexForm.updatePage', page);
+      $scope.$emit('flexForm.updatePage', page.key);
+      $scope.$broadcast('flexForm.updatePage', page.key);
     }
 
     function validatePage(page, noBadge) {
