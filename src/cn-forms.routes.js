@@ -28,14 +28,14 @@
             url: `${options.baseUrl}?${queryParams}`,
             controller: options.controller,
             controllerAs: 'vm',
-            template: '<ui-view></ui-view>',
             resolve: options.resolve,
             permissions: options.permissions,
-            params: options.params
+            params: options.params,
+            templateUrl: options.templateUrl,
+            reloadOnSearch: false
           })
           .state(options.name + '.page', {
             url: `/${pageParam}`,
-            templateUrl: options.templateUrl,
             permissions: options.permissions
           });
 
