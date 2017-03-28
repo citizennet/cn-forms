@@ -36,7 +36,8 @@
           })
           .state(options.name + '.page', {
             url: `/${pageParam}`,
-            permissions: options.permissions
+            permissions: options.permissions,
+            template: '<ui-view/>'
           });
 
       cnFlexFormRoutesProvider.addStates(options);
