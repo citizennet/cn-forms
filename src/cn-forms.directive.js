@@ -141,7 +141,7 @@
     function updatePage(page, pageIndex) {
       $scope.$broadcast('schemaFormValidate');
 
-      vm.validatePage(vm.page.key);
+      vm.validatePage(vm.page);
 
       $stateParams.page = page.key;
       $state.go($state.current.name, $stateParams);
