@@ -135,7 +135,7 @@
     function updatePage(page, pageIndex) {
       $scope.$broadcast('schemaFormValidate');
 
-      vm.validatePage(vm.page.key);
+      vm.validatePage(vm.page);
 
       $stateParams.page = page.key;
       $state.go($state.current.name, $stateParams);
@@ -210,7 +210,8 @@
         reloadOnSearch: false
       }).state(options.name + '.page', {
         url: '/' + pageParam,
-        permissions: options.permissions
+        permissions: options.permissions,
+        template: '<ui-view/>'
       });
 
       cnFlexFormRoutesProvider.addStates(options);
