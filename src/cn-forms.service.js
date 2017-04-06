@@ -9,7 +9,8 @@
       compile: compile,
       getPage: getPage,
       getPageIndex: getPageIndex,
-      update: update
+      update: update,
+      destroy: destroy
     };
 
     return service;
@@ -17,15 +18,11 @@
     //////////////
 
     function compile(schema, page) {
-      //console.log('schema, page:', schema, page);
       service.schema = schema;
       update(page);
     }
 
     function update(page) {
-      //console.log('service:', service, page);
-      //service.form = _.find(service.schema.forms, {key: page});
-      //service.schema.form = service.form.form;
       if (service.schema.forms) {
         for(var i = 0, l = service.schema.forms.length; i < l; i++) {
           var form = service.schema.forms[i];
@@ -49,5 +46,10 @@
       return service.formIndex;
     }
 
+    function destroy() {
+      service.form = null;
+      service.schema = null;
+      service.formIndex = null;
+    }
   }
 })();

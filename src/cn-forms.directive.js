@@ -1,8 +1,9 @@
 (function() {
   'use strict';
+
   angular
-      .module('cn.forms')
-      .directive('cnForm', cnForm);
+    .module('cn.forms')
+    .directive('cnForm', cnForm);
 
   function cnForm() {
     return {
@@ -25,6 +26,8 @@
   ];
   function Form(cnFormsService, $rootScope, $scope, $state,
                 $stateParams, $timeout, $log, $location, $compile) {
+    function cnFormTag() {}
+    $scope.__tag = new cnFormTag();
 
     var vm = this;
 
@@ -47,14 +50,12 @@
     $scope.$on('$destroy', function() {
       $scope.$broadcast(vm.cleanupEvent);
       $scope.$emit(vm.cleanupEvent);
+      cnFormsService.destroy();
     });
 
     //////////
 
     function activate(watch) {
-      //console.log('watch:', watch);
-
-      //vm.activateOffscreen = true;
       vm.activateOffscreen = false;
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
@@ -63,7 +64,6 @@
 
       if(vm.config.schema) {
         try {
-          //vm.ogSchema = _.clone(vm.config.schema, true);
           vm.compiled = false;
           cnFormsService.compile(vm.config.schema, $stateParams.page);
           vm.pageIndex = cnFormsService.getPageIndex();
@@ -105,10 +105,6 @@
     }
 
     function loadOffscreen() {
-      //if(vm.offscreenTimeout) {
-      //  $timeout.cancel(vm.offscreenTimeout);
-      //  vm.offscreenTimeout = null;
-      //}
       console.log('vm.activateOffscreen:', vm.activateOffscreen);
       vm.activateOffscreen = true;
     }
@@ -156,14 +152,7 @@
     function validatePage(page, noBadge) {
       var curForm = vm.config.formCtrl[page.key];
       if(curForm) {
-        console.log('curForm.$error:', curForm.$error);
-        //var errors = _
-        //    .chain(curForm.$error)
-        //    .reduce(function(left, right) {
-        //      return _.merge(left, right);
-        //    })
-        //    .each()
-        //    .value();
+        console.error('curForm.$error:', curForm.$error);
 
         var errors = _.chain(curForm.$error)
             .reduce(function(left, right) {
@@ -174,7 +163,6 @@
             .value();
 
         if(errors && errors.length) {
-          //$rootScope.$broadcast('cnForms:errors:' + page.key, errors);
           page.errors = !noBadge && errors.length;
         }
         else {
