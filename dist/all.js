@@ -29,6 +29,8 @@
 
   Form.$inject = ['cnFormsService', '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$log', '$location', '$compile'];
   function Form(cnFormsService, $rootScope, $scope, $state, $stateParams, $timeout, $log, $location, $compile) {
+    function cnFormTag() {}
+    $scope.__tag = new cnFormTag();
 
     var vm = this;
 
@@ -51,14 +53,12 @@
     $scope.$on('$destroy', function () {
       $scope.$broadcast(vm.cleanupEvent);
       $scope.$emit(vm.cleanupEvent);
+      cnFormsService.destroy();
     });
 
     //////////
 
     function activate(watch) {
-      //console.log('watch:', watch);
-
-      //vm.activateOffscreen = true;
       vm.activateOffscreen = false;
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
@@ -67,7 +67,6 @@
 
       if (vm.config.schema) {
         try {
-          //vm.ogSchema = _.clone(vm.config.schema, true);
           vm.compiled = false;
           cnFormsService.compile(vm.config.schema, $stateParams.page);
           vm.pageIndex = cnFormsService.getPageIndex();
@@ -106,10 +105,6 @@
     }
 
     function loadOffscreen() {
-      //if(vm.offscreenTimeout) {
-      //  $timeout.cancel(vm.offscreenTimeout);
-      //  vm.offscreenTimeout = null;
-      //}
       console.log('vm.activateOffscreen:', vm.activateOffscreen);
       vm.activateOffscreen = true;
     }
@@ -155,21 +150,13 @@
     function validatePage(page, noBadge) {
       var curForm = vm.config.formCtrl[page.key];
       if (curForm) {
-        console.log('curForm.$error:', curForm.$error);
-        //var errors = _
-        //    .chain(curForm.$error)
-        //    .reduce(function(left, right) {
-        //      return _.merge(left, right);
-        //    })
-        //    .each()
-        //    .value();
+        console.error('curForm.$error:', curForm.$error);
 
         var errors = _.chain(curForm.$error).reduce(function (left, right) {
           return left.concat(right);
         }).uniq('$name').reject({ $name: '' }).value();
 
         if (errors && errors.length) {
-          //$rootScope.$broadcast('cnForms:errors:' + page.key, errors);
           page.errors = !noBadge && errors.length;
         } else {
           page.errors = 0;
@@ -243,7 +230,8 @@
       compile: compile,
       getPage: getPage,
       getPageIndex: getPageIndex,
-      update: update
+      update: update,
+      destroy: destroy
     };
 
     return service;
@@ -251,15 +239,11 @@
     //////////////
 
     function compile(schema, page) {
-      //console.log('schema, page:', schema, page);
       service.schema = schema;
       update(page);
     }
 
     function update(page) {
-      //console.log('service:', service, page);
-      //service.form = _.find(service.schema.forms, {key: page});
-      //service.schema.form = service.form.form;
       if (service.schema.forms) {
         for (var i = 0, l = service.schema.forms.length; i < l; i++) {
           var form = service.schema.forms[i];
@@ -280,6 +264,12 @@
 
     function getPageIndex() {
       return service.formIndex;
+    }
+
+    function destroy() {
+      service.form = null;
+      service.schema = null;
+      service.formIndex = null;
     }
   }
 })();
