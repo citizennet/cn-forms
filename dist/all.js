@@ -134,6 +134,10 @@
 
     function updatePage(page, pageIndex) {
       $scope.$broadcast('schemaFormValidate');
+      // if the forms re-render these will no longer be the same reference
+      if (vm.page !== vm.config.schema.forms[vm.pageIndex]) {
+        vm.page = vm.config.schema.forms[vm.pageIndex];
+      }
 
       vm.validatePage(vm.page);
 
