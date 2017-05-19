@@ -43,9 +43,7 @@
     vm.schemaStr = '';
     vm.onSandboxSchema = onSandboxSchema;
 
-    $scope.$watch(function() {
-      return !!vm.config.schema;
-    }, vm.activate);
+    $scope.$watch(() => !!vm.config.schema, vm.activate);
 
     $scope.$on('$destroy', function() {
       $scope.$broadcast(vm.cleanupEvent);
@@ -57,6 +55,7 @@
 
     function activate(watch) {
       vm.activateOffscreen = false;
+      vm.config.getScope = vm.config.getScope || (() => $scope);
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
       vm.config.buttonContainerClass = "page-action-btns";
