@@ -60,6 +60,9 @@
 
     function activate(watch) {
       vm.activateOffscreen = false;
+      vm.config.getScope = vm.config.getScope || function () {
+        return $scope;
+      };
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
       vm.config.buttonContainerClass = "page-action-btns";
