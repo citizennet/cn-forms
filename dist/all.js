@@ -60,6 +60,9 @@
 
     function activate(watch) {
       vm.activateOffscreen = false;
+      vm.config.getScope = vm.config.getScope || function () {
+        return $scope;
+      };
       vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
       vm.config.buttonContainerClass = "page-action-btns";
@@ -134,6 +137,10 @@
 
     function updatePage(page, pageIndex) {
       $scope.$broadcast('schemaFormValidate');
+      // if the forms re-render these will no longer be the same reference
+      if (vm.page !== vm.config.schema.forms[vm.pageIndex]) {
+        vm.page = vm.config.schema.forms[vm.pageIndex];
+      }
 
       vm.validatePage(vm.page);
 
