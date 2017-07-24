@@ -27,8 +27,9 @@
     };
   }
 
-  Form.$inject = ['cnFormsService', '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$log', '$location', '$compile'];
-  function Form(cnFormsService, $rootScope, $scope, $state, $stateParams, $timeout, $log, $location, $compile) {
+  Form.$inject = ['cnFormsService', '$scope', '$state', '$stateParams', '$timeout', '$log', '$location', '$compile'];
+  function Form(cnFormsService, $scope, $state, $stateParams, $timeout, $log, $location, $compile) {
+
     function cnFormTag() {}
     $scope.__tag = new cnFormTag();
 

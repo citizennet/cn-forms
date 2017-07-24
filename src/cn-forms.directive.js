@@ -21,11 +21,12 @@
   }
 
   Form.$inject = [
-    'cnFormsService', '$rootScope', '$scope', '$state',
+    'cnFormsService', '$scope', '$state',
     '$stateParams', '$timeout', '$log', '$location', '$compile'
   ];
-  function Form(cnFormsService, $rootScope, $scope, $state,
+  function Form(cnFormsService, $scope, $state,
                 $stateParams, $timeout, $log, $location, $compile) {
+
     function cnFormTag() {}
     $scope.__tag = new cnFormTag();
 
