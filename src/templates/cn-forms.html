@@ -86,4 +86,6 @@
     </div>
   </div>
 </form>
-<ui-view></ui-view>
+<div ng-if="!vm.config.disableModalView">
+  <ui-view/>
+</div>
