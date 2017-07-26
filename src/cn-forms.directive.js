@@ -57,10 +57,12 @@
     function activate(watch) {
       vm.activateOffscreen = false;
       vm.config.getScope = vm.config.getScope || (() => $scope);
-      vm.config.cols = 3;
       vm.config.formCtrl = vm.cnForm;
       vm.config.buttonContainerClass = "page-action-btns";
       vm.config.isDisabled = isDisabled;
+
+      setupStyles(vm.config);
+      //if(vm.config.isModal) setupModal(vm.config);
 
       if(vm.config.schema) {
         try {
@@ -96,6 +98,26 @@
       }
     }
 
+    function setupStyles(config) {
+      vm.styles = config.styles || {};
+      vm.styles.head = vm.styles.head || config.isModal ?
+        'modal-header clearfix' : 'cn-form-head cn-heading row vertical-parent';
+      vm.styles.offset = vm.styles.offset || config.isModal ?
+        false : 0;
+      vm.styles.body = vm.styles.body || vm.styles.offset === false ?
+        '' : 'cn-form-fixed';
+      vm.styles.col1 = vm.styles.col1 || config.isModal ?
+        '' : 'col-sm-2';
+      vm.styles.col2 = vm.styles.col2 || config.isModal ?
+        '' : 'col-sm-6';
+      vm.styles.col3 = vm.styles.col3 || config.isModal ?
+        '' : (vm.config.schema.forms ? 'col-sm-4' : 'col-sm-6');
+      vm.styles.nav = vm.styles.nav || config.isModal ?
+        '' : 'nav-stacked';
+      vm.styles.cols = vm.styles.cols || config.isModal ?
+        2 : 3;
+    }
+
      function isDisabled(btnConfig) {
       return btnConfig.isDisabled ? btnConfig.isDisabled(isFormInvalid) : isFormInvalid(btnConfig);
     }
@@ -105,12 +127,10 @@
     }
 
     function loadOffscreen() {
-      console.log('vm.activateOffscreen:', vm.activateOffscreen);
       vm.activateOffscreen = true;
     }
 
     function submit(form, handler) {
-      console.log('submit:');
       vm.loadOffscreen();
 
       $scope.$broadcast('schemaFormValidate');
@@ -120,7 +140,6 @@
         vm.saving = true;
         handler(vm.model)
             .then(function(response) {
-              console.log('submit:response:', response);
               vm.config.formCtrl.$setPristine();
               vm.saving = false;
             }, function(rejection) {
