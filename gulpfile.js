@@ -15,6 +15,7 @@ var runSequence = require('run-sequence');
 gulp.task('lint', function() {
   return gulp.src('src/*.js')
       .pipe(jshint({
+        esnext: true,
         multistr: true,
         validthis: true,
         evil: true
