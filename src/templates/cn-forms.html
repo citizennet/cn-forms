@@ -1,23 +1,29 @@
 <form name="vm.cnForm">
-  <section class="cn-form-head cn-heading row vertical-parent">
-    <div class="container-fluid max-width">
-      <cn-flex-form-header ff-header-config="vm.config"
-                           ff-submit="vm.submit(vm.cnForm, handler)"
-                           ff-load-offscreen="vm.loadOffscreen()">
-      </cn-flex-form-header>
-    </div>
+  <section class="{{vm.styles.head}}">
+    <cn-flex-form-header
+      ff-header-config="vm.config"
+      ff-submit="vm.submit(vm.cnForm, handler)"
+      ff-load-offscreen="vm.loadOffscreen()"
+    />
   </section>
-  <div class="cn-form cn-form-cols-3"
-       cn-responsive-height
-       cn-responsive-break="sm">
+  <div
+    class="cn-form cn-form-cols-{{vm.styles.cols}} {{vm.styles.body}}"
+    cn-responsive-height="{{vm.styles.offset}}"
+    cn-responsive-break="sm"
+  >
     <div class="cn-form-inner">
 
-      <div class="col-sm-2 cn-form-nav" ng-if="vm.config.schema.forms">
-        <div class="cn-form-nav-inner"
-             cn-parent-width
-             cn-responsive-height
-             cn-responsive-break="sm">
-          <ul class="nav nav-pills nav-stacked">
+      <div
+        ng-if="vm.config.schema.forms"
+        class="cn-form-nav {{vm.styles.col1}}"
+      >
+        <div
+          class="cn-form-nav-inner"
+          cn-parent-width
+          cn-responsive-height="{{vm.styles.offset}}"
+          cn-responsive-break="sm"
+        >
+          <ul class="nav nav-pills {{vm.styles.nav}}">
             <li class="{{page.key === vm.page.key ? 'active' : ''}}"
                 ng-repeat="page in vm.config.schema.forms">
               <a ng-click="vm.updatePage(page, $index)">
@@ -29,7 +35,7 @@
         </div>
       </div>
 
-      <div class="cn-form-body col-sm-6">
+      <div class="cn-form-body {{vm.styles.col2}}">
         <div class="{{$index !== vm.pageIndex ? 'offscreen' : ''}}"
              ng-if="vm.config.schema.forms"
              ng-repeat="form in vm.config.schema.forms">
@@ -73,12 +79,17 @@
         <!-- end sandbox -->
       </div>
 
-      <div class="cn-form-meta" ng-class="{'col-sm-4': vm.config.schema.forms, 'col-sm-6': !vm.config.schema.forms}">
-        <div class="cn-form-meta-inner"
-             cn-parent-width
-             cn-responsive-height
-             cn-responsive-break="sm"
-             cn-set-max-height="true">
+      <div
+        ng-if="vm.styles.cols > 2"
+        class="cn-form-meta {{vm.styles.col3}}"
+      >
+        <div
+          class="cn-form-meta-inner"
+          cn-parent-width
+          cn-responsive-height="{{vm.styles.offset}}"
+          cn-responsive-break="sm"
+          cn-set-max-height="true"
+        >
           <div ng-bind-html="vm.config.schema.meta"/>
           <div ng-transclude/>
         </div>
@@ -86,4 +97,6 @@
     </div>
   </div>
 </form>
-<ui-view></ui-view>
+<div ng-if="!vm.config.isModal">
+  <ui-view/>
+</div>
