@@ -164,6 +164,11 @@
 
       $scope.$emit('flexForm.updatePage', page.key);
       $scope.$broadcast('flexForm.updatePage', page.key);
+      $scope.$broadcast('schemaFormRedraw');
+
+      setTimeout(function () {
+        $scope.$broadcast('schemaFormValidate');
+      }, 100);
     }
 
     function validatePage(page, noBadge) {
