@@ -158,12 +158,20 @@
 
       $stateParams.page = page.key;
       $state.go($state.current.name, $stateParams);
+      var oldPage = vm.page;
       vm.page = page;
       vm.pageIndex = pageIndex;
       vm.renderedPages[pageIndex] = true;
 
       $scope.$emit('flexForm.updatePage', page.key);
       $scope.$broadcast('flexForm.updatePage', page.key);
+      $scope.$broadcast('schemaFormRedraw');
+
+      $timeout(function () {
+        $scope.$broadcast('schemaFormValidate');
+        vm.validatePage(vm.page);
+        vm.validatePage(oldPage);
+      });
     }
 
     function validatePage(page, noBadge) {
