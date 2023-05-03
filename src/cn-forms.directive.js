@@ -16,7 +16,20 @@
       },
       controller: Form,
       controllerAs: 'vm',
-      bindToController: true
+      bindToController: true,
+      link: function(scope, element, attrs) {
+        // Add event listener to prevent Enter key in cn-form
+        element.on('keydown', function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+          }
+        });
+  
+        // Clean up the event listener
+        scope.$on('$destroy', function() {
+          element.off('keydown');
+        });
+      },
     };
   }
 

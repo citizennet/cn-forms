@@ -12,7 +12,6 @@
     cn-responsive-break="sm"
   >
     <div class="cn-form-inner">
-
       <div
         ng-if="vm.config.schema.forms"
         class="cn-form-nav {{vm.styles.col1}}"
@@ -24,11 +23,15 @@
           cn-responsive-break="sm"
         >
           <ul class="nav nav-pills {{vm.styles.nav}}">
-            <li class="{{page.key === vm.page.key ? 'active' : ''}}"
-                ng-repeat="page in vm.config.schema.forms">
+            <li
+              class="{{page.key === vm.page.key ? 'active' : ''}}"
+              ng-repeat="page in vm.config.schema.forms"
+            >
               <a ng-click="vm.updatePage(page, $index)">
                 {{page.title || page.key | titleCase}}
-                <span class="badge has-error" ng-show="page.errors">{{page.errors}}</span>
+                <span class="badge has-error" ng-show="page.errors"
+                  >{{page.errors}}</span
+                >
               </a>
             </li>
           </ul>
@@ -36,16 +39,19 @@
       </div>
 
       <div class="cn-form-body {{vm.styles.col2}}">
-        <div class="{{$index !== vm.pageIndex ? 'offscreen' : ''}}"
-             ng-if="vm.config.schema.forms"
-             ng-repeat="form in vm.config.schema.forms">
+        <div
+          class="{{$index !== vm.pageIndex ? 'offscreen' : ''}}"
+          ng-if="vm.config.schema.forms"
+          ng-repeat="form in vm.config.schema.forms"
+        >
           <cn-flex-form
             ff-form-index="$index"
             ff-form-name="form.key"
             ff-config="vm.config"
             ff-model="vm.model"
             ff-delay-form="!vm.renderedPages[$index] && !vm.activateOffscreen"
-            ff-cleanup-event="vm.cleanupEvent">
+            ff-cleanup-event="vm.cleanupEvent"
+          >
           </cn-flex-form>
         </div>
 
@@ -55,7 +61,8 @@
           ff-form-name="vm.formKey"
           ff-config="vm.config"
           ff-model="vm.model"
-          ff-cleanup-event="vm.cleanupEvent">
+          ff-cleanup-event="vm.cleanupEvent"
+        >
         </cn-flex-form>
 
         <!-- sandbox for debug mode -->
@@ -64,25 +71,24 @@
 
           <div class="form-group">
             <label class="control-label" for="schema">Form Data</label>
-            <textarea id="schema"
-                      class="form-control"
-                      ng-model="vm.schemaStr"
-                      rows="14">
+            <textarea
+              id="schema"
+              class="form-control"
+              ng-model="vm.schemaStr"
+              rows="14"
+            >
             </textarea>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary"
-                    ng-click="vm.onSandboxSchema()">Update Form
+            <button class="btn btn-primary" ng-click="vm.onSandboxSchema()">
+              Update Form
             </button>
           </div>
         </fieldset>
         <!-- end sandbox -->
       </div>
 
-      <div
-        ng-if="vm.styles.cols > 2"
-        class="cn-form-meta {{vm.styles.col3}}"
-      >
+      <div ng-if="vm.styles.cols > 2" class="cn-form-meta {{vm.styles.col3}}">
         <div
           class="cn-form-meta-inner"
           cn-parent-width
@@ -90,13 +96,14 @@
           cn-responsive-break="sm"
           cn-set-max-height="true"
         >
-          <div ng-bind-html="vm.config.schema.meta"/>
-          <div ng-transclude/>
+          <div ng-bind-html="vm.config.schema.meta" />
+          <div ng-transclude />
         </div>
       </div>
     </div>
   </div>
 </form>
 <div ng-if="!vm.config.isModal">
-  <ui-view/>
+  <ui-view />
 </div>
+
