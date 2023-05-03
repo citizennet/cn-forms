@@ -92,6 +92,10 @@
           }, {});
         } catch (e) {
           $log.error('There was an error with your form data:', e.message);
+        } finally {
+          // After the compilation is finished, 
+          // vm.activateOffscreen should be set to true so that isFormInvalid() can return the correct result.
+          vm.activateOffscreen = true;
         }
       }
 
