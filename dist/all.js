@@ -182,7 +182,11 @@
 
       $scope.$emit('flexForm.updatePage', page.key);
       $scope.$broadcast('flexForm.updatePage', page.key);
-      $scope.$broadcast('schemaFormRedraw');
+
+      if (!(_.get(page, 'key', '') === 'genericCreative')) {
+        // TODO: will remove this safely.
+        $scope.$broadcast('schemaFormRedraw');
+      }
 
       $timeout(function () {
         $scope.$broadcast('schemaFormValidate');
