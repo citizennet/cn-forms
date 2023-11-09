@@ -198,7 +198,7 @@
 
     function validatePage(page, noBadge) {
       var curForm = vm.config.formCtrl[page.key];
-      if(curForm) {
+      if(curForm && Object.keys(curForm.$error).length > 0 ) {
         console.error('curForm.$error:', curForm.$error);
 
         var errors = _.chain(curForm.$error)
