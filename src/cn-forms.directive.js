@@ -209,10 +209,9 @@
             .reject({$name: ''})
             .value();
 
-        if(errors && errors.length) {
+        if(errors && errors.length > 0) {
           page.errors = !noBadge && errors.length;
-        }
-        else {
+        } else {
           page.errors = 0;
         }
       }
